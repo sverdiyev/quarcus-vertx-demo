@@ -1,0 +1,12 @@
+GET http://localhost:8080/fruits
+Accept: application/json
+
+###
+POST http://localhost:8080/fruits
+Content-Type: application/json
+
+{
+  "name": "elo1"
+}
+
+###
