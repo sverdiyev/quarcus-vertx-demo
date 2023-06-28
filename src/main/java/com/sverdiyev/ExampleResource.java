@@ -5,12 +5,18 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/hello")
+@Produces(MediaType.TEXT_PLAIN)
 public class ExampleResource {
 
   @GET
-  @Produces(MediaType.TEXT_PLAIN)
+  @Path("/hello")
   public String hello() {
     return "Hello from RESTEasy Reactive";
+  }
+
+  @GET
+  @Path("/reactive-hello")
+  public Uni<String> helloReactive() {
+    return Uni.createFrom().item("Hello Reactive");
   }
 }
