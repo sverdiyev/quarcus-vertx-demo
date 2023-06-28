@@ -1,4 +1,4 @@
-package com.sverdiyev.vertx;
+package com.sverdiyev.vertx.verticles;
 
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.vertx.core.AbstractVerticle;
@@ -8,7 +8,7 @@ import java.time.Duration;
 
 @SuppressWarnings("java:S106")
 @ApplicationScoped // is that smth like @Component? So it is available in other parts of the app?
-public class PeriodicFruitFetcher extends AbstractVerticle {
+public class ProviderVerticle extends AbstractVerticle {
 
   @Override
   public Uni<Void> asyncStart() {

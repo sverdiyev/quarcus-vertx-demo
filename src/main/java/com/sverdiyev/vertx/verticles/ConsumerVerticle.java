@@ -1,4 +1,4 @@
-package com.sverdiyev.vertx;
+package com.sverdiyev.vertx.verticles;
 
 import io.quarkus.vertx.ConsumeEvent;
 import io.smallrye.mutiny.Uni;
