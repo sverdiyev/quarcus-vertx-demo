@@ -12,6 +12,6 @@ public class VerticleDeployer {
 
   public void init(@Observes StartupEvent startupEvent, Vertx vertx, Instance<AbstractVerticle> verticles) {
 
-    verticles.forEach(v -> vertx.deployVerticle(v).await().indefinitely());
+    verticles.forEach(v -> vertx.deployVerticle(v).await().indefinitely()); //HOW TO DEPLOY MULTIPLE?
   }
 }
