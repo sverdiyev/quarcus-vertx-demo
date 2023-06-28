@@ -4,6 +4,10 @@ import com.sverdiyev.models.Fruit;
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.panache.common.Sort;
 import io.smallrye.mutiny.Uni;
+import io.vertx.mutiny.core.eventbus.EventBus;
+import io.vertx.mutiny.core.eventbus.Message;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -14,19 +18,28 @@ import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON) // default
 @Consumes(MediaType.APPLICATION_JSON) // default
-//@ApplicationScoped // why is this needed?
+@ApplicationScoped // why is this needed?
 @Path("/")
 public class ExampleResource {
+
+  @Inject
+  public EventBus bus;
+
 
   @GET
   @Path("/hello")
   public String hello() {
+
     return "Hello from RESTEasy Reactive";
   }
 
   @GET
   @Path("/reactive-hello")
   public Uni<String> helloReactive() {
+
+    bus.<String>request("greetings", "Sasha")
+      .onItem().transform(Message::body);
+
     return Uni.createFrom().item("Hello Reactive");
   }
 

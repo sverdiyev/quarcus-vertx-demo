@@ -15,7 +15,7 @@ public class ConsumerVerticle extends AbstractVerticle {
     return Uni.createFrom().voidItem();
   }
 
-  @ConsumeEvent("greeting")
+  @ConsumeEvent("greetings")
   public String consume(String name) {
     System.out.println("consumer 1 runs");
     return name.toUpperCase();
