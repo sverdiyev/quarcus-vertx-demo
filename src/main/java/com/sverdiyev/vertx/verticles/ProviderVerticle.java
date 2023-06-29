@@ -24,11 +24,11 @@ public class ProviderVerticle extends AbstractVerticle {
       //from guide
       bus.<String>request(ADDRESS_ONE, "Sasha")
         .onItem().transform(Message::body)
-        .invoke(body -> System.out.println("Received: " + body));
+        .subscribe().with(body -> System.out.println("Received: " + body));
 
       //greeting 2
       bus.<String>request(ADDRESS_TWO, "sasha")
-        .onItem().invoke(response -> System.out.println(response.body()));
+        .subscribe().with(response -> System.out.println(response.body()));
 
     });
 
