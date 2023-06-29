@@ -8,32 +8,31 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.time.Duration;
 
 @SuppressWarnings("java:S106")
-@ApplicationScoped // is that smth like @Component? So it is available in other parts of the app?
+@ApplicationScoped
 public class ProviderVerticle extends AbstractVerticle {
 
+
+  public static final String ADDRESS_ONE = "address_one";
+  public static final String ADDRESS_TWO = "address_two";
 
   @Override
   public Uni<Void> asyncStart() {
     final EventBus bus = vertx.eventBus();
 
-    //greeting 1
     vertx.setPeriodic(Duration.ofSeconds(1).toMillis(), item -> {
-//      bus.<String>request("greeting", "sasha")
-//        .onItem().invoke(response -> System.out.println(response.body()));
 
       //from guide
-      bus.<String>request("greetings", "Sasha")
+      bus.<String>request(ADDRESS_ONE, "Sasha")
         .onItem().transform(Message::body)
         .invoke(body -> System.out.println("Received: " + body));
 
       //greeting 2
-      bus.<String>request("greeting2", "sasha")
+      bus.<String>request(ADDRESS_TWO, "sasha")
         .onItem().invoke(response -> System.out.println(response.body()));
 
-      System.out.println("tick tok");
     });
 
-    System.out.println("provider verticle deployed");
+    System.out.println("deployment id in provider verticle: " + vertx.getOrCreateContext().deploymentID());
     return Uni.createFrom().voidItem();
   }
 }

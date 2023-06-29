@@ -15,13 +15,13 @@ public class ConsumerVerticle extends AbstractVerticle {
     return Uni.createFrom().voidItem();
   }
 
-  @ConsumeEvent("greetings")
+  @ConsumeEvent(ProviderVerticle.ADDRESS_ONE)
   public String consume(String name) {
     System.out.println("consumer 1 runs");
     return name.toUpperCase();
   }
 
-  @ConsumeEvent("greeting2")
+  @ConsumeEvent(ProviderVerticle.ADDRESS_TWO)
   public Uni<String> consume2(String name) {
     System.out.println("consumer 2 runs");
     return Uni.createFrom().item(name::toUpperCase);
