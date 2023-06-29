@@ -11,7 +11,7 @@ public class ConsumerVerticle extends AbstractVerticle {
 
   @Override
   public Uni<Void> asyncStart() {
-    System.out.println("consumer deployed");
+    System.out.println("deployment id in consumer verticle: " + vertx);
     return Uni.createFrom().voidItem();
   }
 
